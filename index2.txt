@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TELECOMFY</title>
+
+<!-- Fuente -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: "Montserrat", sans-serif;
+    background: #f5f5fb;
+    color: #14121f;
+  }
+
+  /* HEADER */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: rgba(10,10,16,0.92);
+    color: white;
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    padding: 0.7rem 0;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+  }
+
+  .header-inner {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  nav a {
+    margin-left: 1rem;
+    cursor: pointer;
+    color: #fff;
+    letter-spacing: 0.05em;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+    transition: background 0.2s, transform 0.2s, opacity 0.2s;
+  }
+
+  nav a:hover {
+    background: rgba(255,255,255,0.14);
+    transform: translateY(-1px);
+    opacity: 0.9;
+  }
+
+  /* SECCIONES OCULTABLES */
+  .section {
+    display: none;
+    padding-top: 74px;
+  }
+
+  .active {
+    display: block;
+  }
+
+  /* HERO GENERAL */
+  .hero {
+    position: relative;
+    min-height: 360px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    margin-top: 48px;
+    overflow: hidden;
+  }
+
+  /* Capa de imagen */
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("icons/banner principal.jpg");
+    background-size: cover;
+    background-position: center;
+    z-index: -2;
+    transform: scale(1.05);
+  }
+
+  /* Capa de degradado */
+  .hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top left, rgba(160,0,255,0.55), transparent 50%),
+                linear-gradient(120deg, rgba(4,4,12,0.95), rgba(12,2,40,0.92));
+    z-index: -1;
+  }
+
+  /* BANNERS ESPECÍFICOS POR SECCIÓN */
+  .hero-servicios::before {
+    background-image: url("icons/OIUGV20.jpg");
+  }
+
+  .hero-testimonios::before {
+    background-image: url("icons/banner testimonios.jpg");
+  }
+
+  .hero-contacto::before {
+    background-image: url("icons/banner contactanos.jpg");
+  }
+
+  .hero-title {
+    font-size: 2.4rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .hero-subtitle {
+    font-size: 0.95rem;
+    margin-top: 0.6rem;
+    opacity: 0.9;
+  }
+
+  .hero-line {
+    width: 220px;
+    height: 4px;
+    background: #a000ff;
+    margin: 1.2rem 0 0;
+  }
+
+  .hero-content {
+    max-width: 960px;
+    padding: 3rem 1.5rem 3.5rem;
+    animation: fadeUp 0.9s ease-out 0.15s both;
+  }
+
+  /* CTA */
+  .cta-button {
+    padding: 0.8rem 2.6rem;
+    background: #a000ff;
+    border: none;
+    color: white;
+    border-radius: 999px;
+    margin-top: 0.5rem;
+    cursor: pointer;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    transition: 0.2s;
+  }
+
+  .cta-button:hover {
+    background: #7b00c7;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.28);
+  }
+
+  /* CONTENEDOR GENERAL */
+  .section-container {
+    max-width: 1100px;
+    margin: 3rem auto;
+    padding: 0 1.5rem;
+  }
+
+  .section-title {
+    text-align: center;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    letter-spacing: 0.14em;
+    color: #221632;
+  }
+
+  /* FRANJA DE STATS (INICIO) */
+  .stats-bar {
+    background: #f3edff;
+    border-top: 1px solid #e0d6ff;
+    border-bottom: 1px solid #e0d6ff;
+  }
+
+  .stats-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 1.4rem 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .stats-item {
+    flex: 1 1 200px;
+    min-width: 180px;
+  }
+
+  .stats-item strong {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #a000ff;
+    display: block;
+    margin-bottom: 0.1rem;
+  }
+
+  .stats-item span {
+    font-size: 0.86rem;
+    color: #4b4b60;
+  }
+
+  /* GRID SERVICIOS INICIO */
+  .service-grid {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .service-card {
+    width: 260px;
+    text-align: center;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 0.8rem 0.8rem 1.2rem;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .service-card img {
+    width: 100%;
+    border-radius: 8px;
+    display: block;
+  }
+
+  .service-card p {
+    margin-top: 0.7rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    font-size: 0.82rem;
+    color: #2b213a;
+  }
+
+  .service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+  }
+
+  /* QUIÉNES SOMOS */
+  .about-grid {
+    max-width: 1100px;
+    margin: 2.5rem auto 0;
+    display: grid;
+    grid-template-columns: minmax(0,1.4fr) minmax(0,1fr);
+    gap: 2.5rem;
+    align-items: flex-start;
+  }
+
+  .about-main p {
+    font-size: 0.96rem;
+    line-height: 1.8;
+    color: #353348;
+    margin-bottom: 0.8rem;
+  }
+
+  .about-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.25rem 0.7rem;
+    border-radius: 999px;
+    background: #f3edff;
+    color: #7b3fe8;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.7rem;
+  }
+
+  .about-subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: #221632;
+  }
+
+  .values-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.9rem;
+    margin-top: 1.4rem;
+  }
+
+  .value-card {
+    flex: 1 1 220px;
+    min-width: 220px;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 0.9rem 1rem;
+    border: 1px solid #eee4ff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+    font-size: 0.9rem;
+  }
+
+  .value-card h3 {
+    font-size: 0.94rem;
+    margin-bottom: 0.4rem;
+    color: #5f33c9;
+  }
+
+  .about-image-card {
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+    min-height: 260px;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.3);
+    color: #fff;
+    background: #0b0415;
+  }
+
+  .about-image-card img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.55;
+  }
+
+  .about-image-content {
+    position: relative;
+    padding: 1.6rem 1.7rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 100%;
+  }
+
+  .about-image-content h3 {
+    font-size: 0.95rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    opacity: 0.95;
+  }
+
+  .about-image-content p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    opacity: 0.93;
+  }
+
+  .about-stats {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1.2rem;
+    flex-wrap: wrap;
+  }
+
+  .about-stats-item {
+    flex: 1 1 120px;
+    min-width: 120px;
+  }
+
+  .about-stats-item strong {
+    display: block;
+    font-size: 1.4rem;
+    font-weight: 700;
+  }
+
+  .about-stats-item span {
+    font-size: 0.8rem;
+    opacity: 0.85;
+  }
+
+  /* Servicios / acordeón (lo dejamos casi igual) */
+  details {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    background: #ffffff;
+  }
+
+  summary {
+    padding: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .accordion-content {
+    padding: 1rem 1.5rem;
+  }
+
+  /* CONTACTO (ya lo tienes configurado, no lo tocamos aquí) */
+  .contact-grid {
+    display:flex;
+    flex-wrap:wrap;
+    gap:2rem;
+    justify-content:center;
+    align-items:flex-start;
+  }
+
+  .contact-card {
+    flex:1 1 260px;
+    min-width:260px;
+    background:#ffffff;
+    border-radius:8px;
+    padding:1.5rem;
+    box-shadow:0 2px 6px rgba(0,0,0,0.08);
+    font-size:0.95rem;
+    line-height:1.7;
+  }
+
+  .contact-card h3 {
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    font-size:0.9rem;
+    margin-bottom:0.8rem;
+    color:#a000ff;
+  }
+
+  .contact-item {
+    margin-bottom:0.6rem;
+  }
+
+  .contact-item span {
+    font-weight:600;
+  }
+
+  .contact-form {
+    flex:1 1 260px;
+    min-width:260px;
+    background:#ffffff;
+    border-radius:8px;
+    padding:1.5rem;
+    box-shadow:0 2px 6px rgba(0,0,0,0.08);
+    font-size:0.9rem;
+  }
+
+  .contact-form label {
+    display:block;
+    margin-bottom:0.25rem;
+    font-weight:600;
+    font-size:0.86rem;
+  }
+
+  .contact-form input,
+  .contact-form select,
+  .contact-form textarea {
+    width:100%;
+    padding:0.55rem 0.7rem;
+    border-radius:4px;
+    border:1px solid #ccc;
+    margin-bottom:0.8rem;
+    font-family:inherit;
+    font-size:0.9rem;
+    transition:border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .contact-form input:focus,
+  .contact-form select:focus,
+  .contact-form textarea:focus {
+    outline:none;
+    border-color:#a000ff;
+    box-shadow:0 0 0 2px rgba(160,0,255,0.18);
+  }
+
+  .contact-form textarea {
+    resize:vertical;
+    min-height:110px;
+  }
+
+  .contact-note {
+    font-size:0.82rem;
+    color:#777;
+    margin-top:0.4rem;
+  }
+
+  footer {
+    background: #a000ff;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    margin-top: 3rem;
+    font-size: 0.85rem;
+  }
+
+  /* ANIMACIONES */
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero {
+      text-align: center;
+    }
+    .hero-content {
+      padding: 2.8rem 1.5rem 3.2rem;
+    }
+    .hero-title {
+      font-size: 2.1rem;
+      letter-spacing: 0.06em;
+    }
+    .section-container {
+      margin-top: 2.4rem;
+    }
+    .about-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 600px) {
+    nav a {
+      font-size: 0.75rem;
+      margin-left: 0.5rem;
+      padding: 0.25rem 0.4rem;
+    }
+    .service-card {
+      width: 100%;
+      max-width: 320px;
+    }
+  }
+</style>
+
+
+<script>
+  function show(sectionID) {
+    document.querySelectorAll('.section').forEach(
+      sec => sec.classList.remove('active')
+    );
+    document.getElementById(sectionID).classList.add('active');
+    window.scrollTo(0,0);
+  }
+</script>
+
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div style="font-weight:700; letter-spacing:0.1em;">🌐 TELECOMFY</div>
+
+    <nav>
+      <a onclick="show('inicio')">Inicio</a>
+      <a onclick="show('servicios')">Servicios</a>
+      <a onclick="show('quienes')">Quiénes somos</a>
+      <a onclick="show('testimonios')">Testimonios</a>
+      <a onclick="show('contacto')">Contacto</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============================
+     SECCIÓN: INICIO
+=============================== -->
+<div id="inicio" class="section active">
+
+  <!-- HERO INICIO -->
+  <section class="hero">
+    <div class="hero-content">
+
+      <div class="about-pill">
+        <span>🌐 Soluciones para hogar, comercio e industria</span>
+      </div>
+
+      <h1 class="hero-title" style="margin-bottom:0.7rem;">
+        Tecnología que protege, automatiza<br>
+        y conecta tus espacios
+      </h1>
+
+      <p class="hero-subtitle">
+        En TeleComfy diseñamos, financiamos e instalamos sistemas de seguridad, automatización y monitoreo.
+        Con una mensualidad que incluye garantía y mantenimiento, tu inversión se mantiene protegida.
+      </p>
+
+      <!-- BOTONES HERO -->
+      <div style="margin-top:1.6rem; display:flex; flex-wrap:wrap; gap:0.8rem;">
+        <button class="cta-button" onclick="show('servicios')">
+          Ver planes y paquetes
+        </button>
+
+        <button 
+          onclick="show('contacto')"
+          style="
+            padding:0.8rem 2.4rem;
+            border-radius:999px;
+            border:1px solid #ffffff;
+            background:transparent;
+            color:#ffffff;
+            font-weight:600;
+            letter-spacing:0.08em;
+            text-transform:uppercase;
+            cursor:pointer;
+            font-size:0.8rem;
+            transition:background 0.2s, color 0.2s, transform 0.2s;
+          ">
+          Agendar una llamada
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FRANJA DE NÚMEROS / CONFIANZA -->
+  <div class="stats-bar">
+    <div class="stats-inner">
+      <div class="stats-item">
+        <strong>+80</strong>
+        <span>Proyectos completados</span>
+      </div>
+      <div class="stats-item">
+        <strong>+50</strong>
+        <span>Hogares protegidos con soluciones inteligentes</span>
+      </div>
+      <div class="stats-item">
+        <strong>+30</strong>
+        <span>Negocios e industrias conectadas</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTENIDO PRINCIPAL INICIO -->
+  <section class="section-container">
+
+    <!-- línea morada -->
+    <div style="height:2px; background:#ddd; max-width:750px; margin:2rem auto 1rem; position:relative;">
+      <div style="height:2px; width:180px; background:#a000ff; position:absolute; left:50%; transform:translateX(-50%);"></div>
+    </div>
+
+    <h2 class="section-title">Una experiencia de servicio completa</h2>
+
+    <!-- TARJETAS HOGAR / COMERCIO / INDUSTRIA -->
+    <div class="service-grid">
+      <div class="service-card">
+        <img src="icons/servicios para hogar.jpg" alt="Servicios para hogar">
+        <p>⚙️🏠 Servicios para Hogar</p>
+      </div>
+
+      <div class="service-card">
+        <img src="icons/servicios para comercio.jpg" alt="Servicios para comercio">
+        <p>⚙️🏪 Servicios para Comercio</p>
+      </div>
+
+      <div class="service-card">
+        <img src="icons/servicios para industria.jpg" alt="Servicios para industria">
+        <p>⚙️🏭 Servicios para Industria</p>
+      </div>
+    </div>
+
+    <!-- TEXTO DESCRIPTIVO -->
+    <div style="max-width:750px; margin:2rem auto; font-size:0.98rem; line-height:1.8; text-align:justify;">
+
+      <p>
+        En TeleComfy, nuestro objetivo es ayudarte a vivir y trabajar de manera más cómoda,
+        segura y conectada. Diseñamos soluciones inteligentes que se adaptan a tu hogar,
+        a tu negocio o a tu industria, integrando tecnología de telecomunicaciones con
+        dispositivos IoT.
+      </p>
+
+      <br>
+
+      <p>
+        Ya sea que busques modernizar tu casa con dispositivos inteligentes, fortalecer la
+        seguridad de tu comercio o transformar los procesos de tu industria, en TeleComfy
+        encontrarás una propuesta basada en <strong>financiación de equipos</strong> y
+        <strong>mensualidades que incluyen garantía y mantenimiento</strong>.
+      </p>
+
+      <br>
+
+      <p>
+        Creemos que la conectividad debe ser algo sencillo y confiable. Por eso, te ofrecemos
+        acompañamiento desde el diseño hasta el soporte diario, para que la tecnología trabaje
+        a tu favor todos los días.
+      </p>
+
+    </div>
+
+  </section>
+
+</div>
+<!-- ============================
+     SECCIÓN: SERVICIOS
+=============================== -->
+<div id="servicios" class="section">
+
+  <!-- HERO SERVICIOS -->
+  <section class="hero hero-servicios" style="min-height:220px;">
+    <div class="hero-overlay">
+      <h1 class="hero-title">SERVICIOS</h1>
+      <div class="hero-line"></div>
+    </div>
+  </section>
+
+  <section class="section-container">
+
+    <h2 class="section-title">Planes y Paquetes</h2>
+
+    <p style="text-align:center; color:#a000ff; max-width:780px; margin:0 auto; font-size:1rem;">
+      TeleComfy integra soluciones de telecomunicaciones e IoT para hogares, negocios e industrias.
+      Nuestro esquema de <strong>financiación + mensualidad</strong> te permite instalar equipos 
+      inteligentes sin costos elevados y con mantenimiento incluido.
+    </p>
+
+    <img src="icons/planes y paquetes.jpg"
+         style="width:100%; max-width:780px; margin:2rem auto; display:block; border-radius:4px;">
+
+    <div style="max-width:780px; margin:0 auto;">
+
+
+      <!-- HOGAR -->
+      <details open>
+        <summary>🏠 Para hogar <span>⌄</span></summary>
+        <div class="accordion-content">
+          <ul>
+            <li>
+              <strong>Paquete Hogar Esencial</strong><br>
+              Financiación de cámara Wi-Fi, sensores básicos y router inteligente. 
+              Incluye <strong>pago inicial accesible</strong> + <strong>mensualidad fija</strong> 
+              con garantía, soporte remoto y mantenimiento anual.
+            </li>
+            <li>
+              <strong>Paquete Hogar Confort</strong><br>
+              Iluminación inteligente, cerraduras, sensores avanzados. La mensualidad cubre 
+              garantía extendida, visitas técnicas y reemplazos por falla.
+            </li>
+            <li>
+              <strong>Paquete Hogar Premium</strong><br>
+              Automatización completa: asistentes de voz, escenas, monitoreo 24/7. 
+              Cuota mensual con garantía total, mantenimiento, soporte prioritario 
+              y actualización de equipos al finalizar el plazo.
+            </li>
+          </ul>
+        </div>
+      </details>
+
+
+      <!-- COMERCIO -->
+      <details>
+        <summary>🛍️ Para comercio <span>⌄</span></summary>
+        <div class="accordion-content">
+          <ul>
+            <li>
+              <strong>Plan PyME Segura</strong><br>
+              Financiación de cámaras HD, control de accesos y red optimizada. 
+              Mensualidad que cubre garantía, mantenimiento y monitoreo básico.
+            </li>
+            <li>
+              <strong>Plan Comercio Conectado</strong><br>
+              Añade VPN segura, monitoreo remoto y reportes. La mensualidad funciona como 
+              garantía activa + mantenimiento preventivo y correctivo.
+            </li>
+            <li>
+              <strong>Plan Comercio Pro</strong><br>
+              Pensado para negocios con varias sucursales: analítica de video con IA, 
+              alertas inteligentes y soporte 24/7. Mensualidad con reemplazo de 
+              equipos críticos y revisiones programadas.
+            </li>
+          </ul>
+        </div>
+      </details>
+
+
+      <!-- INDUSTRIA -->
+      <details>
+        <summary>🏭 Para industria <span>⌄</span></summary>
+        <div class="accordion-content">
+          <ul>
+            <li>
+              <strong>Industria Básica</strong><br>
+              Sensores industriales esenciales financiados con instalación inicial + 
+              mensualidad que cubre garantía y soporte remoto.
+            </li>
+            <li>
+              <strong>Industria Inteligente</strong><br>
+              Redes IoT seguras, paneles de supervisión y alertas. Cuota mensual con 
+              mantenimiento programado y soporte especializado.
+            </li>
+            <li>
+              <strong>Industria Avanzada</strong><br>
+              Monitoreo de vibraciones, mantenimiento predictivo, consultoría continua 
+              y renovación de equipos. Mensualidad con garantía extendida y soporte prioritario.
+            </li>
+          </ul>
+        </div>
+      </details>
+
+
+      <!-- CÓMO FUNCIONA LA FINANCIACIÓN -->
+      <div style="max-width:780px; margin:2.5rem auto 0; font-size:0.96rem; line-height:1.7;">
+        <h3 style="text-align:center; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:1rem;">
+          ¿Cómo funciona la financiación?
+        </h3>
+
+        <ol style="padding-left:1.2rem;">
+          <li><strong>Diagnóstico:</strong> visitamos tu hogar, comercio o industria y evaluamos tus necesidades.</li>
+          <li><strong>Propuesta:</strong> te ofrecemos un paquete con pago inicial + mensualidad fija sin letras chiquitas.</li>
+          <li><strong>Instalación:</strong> dejamos todo configurado y funcionando en el mismo día.</li>
+          <li><strong>Garantía + mantenimiento:</strong> mientras mantengas tu mensualidad activa, todo tu equipo está cubierto.</li>
+        </ol>
+
+        <div style="text-align:center; margin-top:1.5rem;">
+          <button class="cta-button" onclick="show('contacto')">
+            Solicitar una cotización
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+</div>
+
+<!-- ============================
+     SECCIÓN: QUIÉNES SOMOS
+=============================== -->
+<div id="quienes" class="section">
+
+  <!-- HERO QUIÉNES SOMOS -->
+  <section class="hero" style="min-height:220px;">
+    <div class="hero-content">
+      <div class="about-pill">
+        <span>Sobre nosotros</span>
+      </div>
+      <h1 class="hero-title" style="margin-bottom:0.7rem;">
+        Quién está detrás de TeleComfy
+      </h1>
+      <p class="hero-subtitle">
+        Un equipo que combina experiencia en telecomunicaciones, automatización e IoT para crear
+        soluciones a la medida de cada espacio.
+      </p>
+      <div class="hero-line"></div>
+    </div>
+  </section>
+
+  <section class="section-container">
+
+    <div class="about-grid">
+
+      <!-- Columna izquierda: texto principal -->
+      <div class="about-main">
+        <h2 class="section-title" style="text-align:left; margin-bottom:0.8rem;">Nuestra historia</h2>
+
+        <p>
+          TeleComfy nace con la idea de acercar la tecnología a las personas y negocios de forma sencilla
+          y útil. Empezamos realizando proyectos pequeños de conectividad y seguridad, y con el tiempo
+          fuimos incorporando automatización, monitoreo remoto y soluciones basadas en IoT.
+        </p>
+
+        <p>
+          Hoy trabajamos con hogares, comercios e industrias que quieren aprovechar la tecnología para
+          mejorar su seguridad, optimizar recursos y ofrecer mejores experiencias a sus clientes y usuarios.
+        </p>
+
+        <h3 class="about-subtitle">Nuestro propósito</h3>
+        <p>
+          Nuestro propósito es conectar personas, espacios y procesos a través de soluciones tecnológicas
+          confiables, fáciles de usar y adaptadas a cada realidad. Queremos que la tecnología trabaje por ti,
+          no que se convierta en una complicación más.
+        </p>
+
+        <h3 class="about-subtitle">Nuestros valores</h3>
+        <div class="values-grid">
+          <div class="value-card">
+            <h3>🔒 Confianza</h3>
+            <p>Buscamos relaciones a largo plazo con nuestros clientes, basadas en transparencia y resultados.</p>
+          </div>
+          <div class="value-card">
+            <h3>⚙️ Innovación útil</h3>
+            <p>No se trata de acumular dispositivos, sino de implementar la tecnología que realmente aporta valor.</p>
+          </div>
+          <div class="value-card">
+            <h3>🤝 Cercanía</h3>
+            <p>Acompañamos en todo el proceso: desde el diagnóstico inicial hasta el soporte del día a día.</p>
+          </div>
+          <div class="value-card">
+            <h3>🌱 Responsabilidad</h3>
+            <p>Fomentamos el uso eficiente de la energía y la optimización de recursos en cada proyecto.</p>
+          </div>
+        </div>
+
+        <h3 class="about-subtitle" style="margin-top:1.8rem;">Cómo trabajamos</h3>
+        <p>
+          Escuchamos tus necesidades, analizamos tu espacio y diseñamos una propuesta a la medida. Después
+          nos encargamos de la instalación, la configuración y el soporte, para que tú solo te enfoques en
+          aprovechar tu sistema.
+        </p>
+
+      </div>
+
+      <!-- Columna derecha: tarjeta visual -->
+      <div class="about-image-card">
+        <!-- Puedes cambiar esta imagen si quieres otro fondo -->
+        <img src="icons/OIUGV20.jpg" alt="Tecnología e IoT">
+        <div class="about-image-content">
+          <h3>PROYECTOS TELECOMFY</h3>
+          <p>
+            Implementamos soluciones que combinan conectividad, seguridad y automatización en hogares,
+            comercios e industrias, con esquemas de financiación y mantenimiento incluidos.
+          </p>
+          <div class="about-stats">
+            <div class="about-stats-item">
+              <strong>+80</strong>
+              <span>Proyectos implementados</span>
+            </div>
+            <div class="about-stats-item">
+              <strong>+5</strong>
+              <span>Años de experiencia combinada</span>
+            </div>
+            <div class="about-stats-item">
+              <strong>3</strong>
+              <span>Segmentos: hogar, comercio, industria</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+</div>
+
+<!-- ============================
+     SECCIÓN: TESTIMONIOS
+=============================== -->
+<div id="testimonios" class="section">
+
+  <!-- HERO TESTIMONIOS -->
+  <section class="hero hero-testimonios" style="min-height:230px;">
+    <div class="hero-overlay">
+      <h1 class="hero-title">TESTIMONIOS</h1>
+      <div class="hero-line"></div>
+    </div>
+  </section>
+
+  <section class="section-container">
+
+    <!-- Texto intro -->
+    <p style="text-align:center; max-width:780px; margin:0 auto 2rem; font-size:0.98rem;">
+      Opiniones reales de clientes que confiaron en TeleComfy para modernizar y proteger sus espacios.
+    </p>
+
+    <!-- TARJETAS DE TESTIMONIOS MEJORADAS -->
+    <div style="display:flex; flex-wrap:wrap; gap:1.5rem; justify-content:center;">
+
+      <!-- HOGAR -->
+      <div style="flex:1 1 300px; min-width:280px; border:1px solid #e5e5e5; border-radius:8px; padding:1.5rem; box-shadow:0 2px 6px rgba(0,0,0,0.08); background:white;">
+        
+        <div style="font-size:2.5rem; line-height:0.8; margin-bottom:0.7rem; color:#a000ff;">“</div>
+        
+        <p style="font-size:0.95rem; line-height:1.6;">
+          Antes era complicado revisar la seguridad de mi casa. Ahora veo todo desde el celular y recibo alertas
+          cuando no estamos. La instalación fue rápida y la mensualidad vale totalmente la pena.
+        </p>
+        
+        <div style="margin-top:0.8rem; font-size:1.1rem; color:#f5c518;">
+          ⭐⭐⭐⭐⭐
+        </div>
+
+        <p style="margin-top:0.5rem; font-weight:600;">— Familia Hernández</p>
+        <p style="font-size:0.85rem; color:#777;">Cliente de Hogar</p>
+      </div>
+
+
+      <!-- COMERCIO -->
+      <div style="flex:1 1 300px; min-width:280px; border:1px solid #e5e5e5; border-radius:8px; padding:1.5rem; box-shadow:0 2px 6px rgba(0,0,0,0.08); background:white;">
+        
+        <div style="font-size:2.5rem; line-height:0.8; margin-bottom:0.7rem; color:#a000ff;">“</div>
+        
+        <p style="font-size:0.95rem; line-height:1.6;">
+          Nos financiaron todo el sistema: cámaras, red y accesos. La mensualidad incluye mantenimiento y eso ha
+          sido una tranquilidad enorme. Ahora tengo monitoreo 24/7 y reportes semanales.
+        </p>
+
+        <div style="margin-top:0.8rem; font-size:1.1rem; color:#f5c518;">
+          ⭐⭐⭐⭐⭐
+        </div>
+
+        <p style="margin-top:0.5rem; font-weight:600;">— Café Punto Norte</p>
+        <p style="font-size:0.85rem; color:#777;">Cliente Comercial</p>
+      </div>
+
+
+      <!-- INDUSTRIA -->
+      <div style="flex:1 1 300px; min-width:280px; border:1px solid #e5e5e5; border-radius:8px; padding:1.5rem; box-shadow:0 2px 6px rgba(0,0,0,0.08); background:white;">
+        
+        <div style="font-size:2.5rem; line-height:0.8; margin-bottom:0.7rem; color:#a000ff;">“</div>
+        
+        <p style="font-size:0.95rem; line-height:1.6;">
+          Gracias al monitoreo industrial inteligente hemos reducido fallas inesperadas. Ahora recibimos alertas
+          antes de que ocurra un problema. La mensualidad incluye mantenimiento y soporte continuo.
+        </p>
+
+        <div style="margin-top:0.8rem; font-size:1.1rem; color:#f5c518;">
+          ⭐⭐⭐⭐⭐
+        </div>
+
+        <p style="margin-top:0.5rem; font-weight:600;">— Planta NovaTec</p>
+        <p style="font-size:0.85rem; color:#777;">Cliente Industrial</p>
+      </div>
+
+    </div>
+
+    <!-- BLOQUE DE CONFIANZA -->
+    <div style="max-width:780px; margin:3rem auto 1.5rem; text-align:center;">
+      
+      <h3 style="text-transform:uppercase; letter-spacing:0.08em; margin-bottom:1rem;">
+        Nuestra comunidad sigue creciendo
+      </h3>
+
+      <div style="display:flex; flex-wrap:wrap; gap:1.5rem; justify-content:center; font-size:0.9rem;">
+
+        <div style="flex:1 1 200px; min-width:200px;">
+          <p style="font-size:1.6rem; font-weight:700; color:#a000ff;">+80</p>
+          <p>Proyectos completados</p>
+        </div>
+
+        <div style="flex:1 1 200px; min-width:200px;">
+          <p style="font-size:1.6rem; font-weight:700; color:#a000ff;">+50</p>
+          <p>Hogares protegidos</p>
+        </div>
+
+        <div style="flex:1 1 200px; min-width:200px;">
+          <p style="font-size:1.6rem; font-weight:700; color:#a000ff;">+30</p>
+          <p>Negocios conectados</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div style="text-align:center; margin-top:1.5rem;">
+      <p style="margin-bottom:0.5rem; font-size:0.95rem;">
+        ¿Quieres una solución similar en tu hogar, comercio o industria?
+      </p>
+      <button class="cta-button" onclick="show('contacto')">
+        Quiero una solución como esta
+      </button>
+    </div>
+
+  </section>
+
+</div>
+
+<!-- ============================
+     SECCIÓN: CONTACTO
+=============================== -->
+<div id="contacto" class="section">
+
+  <!-- HERO CONTACTO -->
+  <section class="hero hero-contacto" style="min-height:220px;">
+    <div class="hero-overlay">
+      <h1 class="hero-title">CONTACTO</h1>
+      <div class="hero-line"></div>
+    </div>
+  </section>
+
+  <section class="section-container">
+
+    <p style="text-align:center; max-width:780px; margin:0 auto 2rem; font-size:0.98rem;">
+      Cuéntanos qué tipo de proyecto tienes en mente y te ayudamos a encontrar la mejor solución
+      para tu hogar, comercio o industria. Podemos trabajar con esquemas de financiación y mensualidades
+      que incluyen garantía y mantenimiento.
+    </p>
+
+    <div class="contact-grid">
+
+      <!-- COLUMNA IZQUIERDA: DATOS DE CONTACTO -->
+      <div class="contact-card">
+        <h3>Datos de contacto</h3>
+
+        <div class="contact-item">
+          <span>Teléfono:</span><br>
+          📞 (444) 123 45 67
+        </div>
+
+        <div class="contact-item">
+          <span>WhatsApp:</span><br>
+          💬 +52 1 444 123 45 67
+        </div>
+
+        <div class="contact-item">
+          <span>Correo electrónico:</span><br>
+          📧 contacto@telecomfy.com
+        </div>
+
+        <div class="contact-item">
+          <span>Ubicación:</span><br>
+          📍 Geógrafos 116A, Himno Nacional 1ª Sección,<br>
+          San Luis Potosí, S.L.P.
+        </div>
+
+        <div class="contact-item">
+          <span>Horario de atención:</span><br>
+          🕒 Lunes a viernes de 9:00 a 18:00 hrs.<br>
+          🕒 Sábados de 10:00 a 14:00 hrs.
+        </div>
+
+        <hr style="margin:1rem 0; border:none; border-top:1px solid #eee;">
+
+        <p style="font-size:0.9rem;">
+          También podemos agendar una videollamada para revisar tu proyecto y mostrarte ejemplos
+          de instalaciones anteriores.
+        </p>
+      </div>
+
+      <!-- COLUMNA DERECHA: FORMULARIO -->
+      <div class="contact-form">
+        <h3 style="text-transform:uppercase; letter-spacing:0.08em; font-size:0.9rem; margin-bottom:0.8rem; color:#a000ff;">
+          Envíanos un mensaje
+        </h3>
+
+        <form action="#" method="post">
+          <label for="nombre">Nombre completo</label>
+          <input type="text" id="nombre" name="nombre" placeholder="Escribe tu nombre">
+
+          <label for="email">Correo electrónico</label>
+          <input type="email" id="email" name="email" placeholder="tucorreo@ejemplo.com">
+
+          <label for="tipo">Tipo de proyecto</label>
+          <select id="tipo" name="tipo">
+            <option value="">Selecciona una opción</option>
+            <option value="hogar">Hogar</option>
+            <option value="comercio">Comercio</option>
+            <option value="industria">Industria</option>
+            <option value="otro">Otro / No estoy seguro</option>
+          </select>
+
+          <label for="mensaje">Cuéntanos brevemente qué necesitas</label>
+          <textarea id="mensaje" name="mensaje" placeholder="Ejemplo: Cámaras y sensores para mi casa, monitoreo de negocio, automatización, etc."></textarea>
+
+          <button type="submit" class="cta-button" style="margin-top:0.4rem;">
+            Enviar mensaje
+          </button>
+
+          <p class="contact-note">
+            *Este formulario es de demostración. Puedes adaptar el envío de la información a tu correo, Google Forms o CRM.
+          </p>
+        </form>
+      </div>
+
+    </div>
+
+    <!-- MAPA -->
+    <div style="margin:3rem auto 0; max-width:900px;">
+      <h3 style="text-align:center; margin-bottom:1rem; text-transform:uppercase; letter-spacing:0.08em;">
+        Ubicación en el mapa
+      </h3>
+
+      <div style="border-radius:10px; overflow:hidden; box-shadow:0 4px 16px rgba(0,0,0,0.15);">
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.474281297675!2d-100.98175592467859!3d22.158166045278385!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x842aa243fcbac81b%3A0xea7506ed1d25bb7e!2sGe%C3%B3grafos%20116A%2C%20Himno%20Nacional%201ra%20Secc%2C%2078210%20San%20Luis%20Potos%C3%AD%2C%20S.L.P.!5e0!3m2!1ses-419!2smx!4v1700000000001!5m2!1ses-419!2smx"
+          width="100%" 
+          height="350" 
+          style="border:0;" 
+          allowfullscreen="" 
+          loading="lazy">
+        </iframe>
+      </div>
+    </div>
+
+  </section>
+
+</div>
+
+
+
+
+<!-- FOOTER -->
+<footer style="
+    background-image:url('icons/623e6c82-f135-49e4-a9fd-a52c571e3294.png');
+    background-size:cover;
+    background-position:center;
+    padding:2rem 1rem;
+    color:white;
+    text-align:center;
+    font-weight:600;
+">
+    Para contactarnos llama o envía un correo electrónico:<br>
+    📞 Tel: (444) 123-4567 &nbsp; | &nbsp; ✉ contacto@telecomfy.com
+</footer>
